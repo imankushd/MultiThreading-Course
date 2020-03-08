@@ -1,3 +1,4 @@
+package com.ankush.ProducerConsumerAssignment;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -75,14 +76,12 @@ class Producer implements Runnable
 					
 				}
 				
+				//account creation code
 				acc = new Account(j, "Ankush:"+j, "Delhi:"+j, j*101.0);
 				
-				if(acc.getAmount()>0)
-				{
 				queue.add(acc);
 				j++;
 				queue.notify();
-				}
 			}
 		}
 		
@@ -160,7 +159,7 @@ public class ProducerConsumerAssignment {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		Queue<Account> queue = new LinkedList<>();
+		Queue<Account> queue = new LinkedList<Account>();
 		FileWriter csvWriter = new FileWriter("C:\\Users\\ANKUSH\\Desktop\\ankush programs\\prodcons.csv");
 		
 		csvWriter.append("Account ID");
@@ -171,7 +170,8 @@ public class ProducerConsumerAssignment {
 		csvWriter.append(",");
 		csvWriter.append("Total Amount");
 		csvWriter.append("\n");
-		
+
+		// To validate capacity must be greater than 0
 		int CAPACITY=0;
 		int countAttempts=0;
 		do {
@@ -195,6 +195,7 @@ public class ProducerConsumerAssignment {
 		Thread producer = new Thread(p,"Producer");
 		Thread consumer = new Thread(c,"Consumer");
 
+		//both threads started
 		producer.start();
 		consumer.start();
 		
@@ -204,6 +205,7 @@ public class ProducerConsumerAssignment {
 			e.printStackTrace();
 		}
 		
+		//manual code to stop the thread on a given condition
 		p.stopProducer();
 		c.stopConsumer();
 		
